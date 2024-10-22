@@ -61,9 +61,7 @@ function consultarPersona(event) {
 
     listaResultado.appendChild(p);
   } else {
-    const p = document.createElement("p");
-    p.textContent = "Persona no encontrada";
-    listaResultado.appendChild(p);
+    alert("Persona no encontrada");
   }
 
   document.getElementById("nombre_consulta").value = "";
