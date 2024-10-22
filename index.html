@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario con localStorage</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Menú de navegación -->
+    <nav class="menu">
+      <ul>
+        <li>
+          <a href="#" onclick="mostrarSeccion('formulario')">Registrar</a>
+        </li>
+        <li><a href="#" onclick="mostrarSeccion('consulta')">Consultar</a></li>
+        <li>
+          <a href="#" onclick="mostrarSeccion('actualizar')">Actualizar</a>
+        </li>
+        <li><a href="#" onclick="mostrarSeccion('eliminar')">Eliminar</a></li>
+      </ul>
+    </nav>
+
+    <!-- Formulario -->
+    <div class="container" id="formulario">
+      <h2>Formulario de Registro</h2>
+      <form id="registroForm" onsubmit="registrarPersona(event)">
+        <div class="form-group">
+          <label for="nombre">Nombre:</label>
+          <input type="text" id="nombre" name="nombre" required />
+        </div>
+
+        <div class="form-group">
+          <label for="telefono">Teléfono:</label>
+          <input type="tel" id="telefono" name="telefono" required />
+        </div>
+
+        <div class="form-group">
+          <label for="sexo">Sexo:</label>
+          <select id="sexo" name="sexo" required>
+            <option value="masculino">Masculino</option>
+            <option value="femenino">Femenino</option>
+            <option value="otro">Otro</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="pais">País:</label>
+          <input type="text" id="pais" name="pais" required />
+        </div>
+
+        <div class="form-group">
+          <label for="departamento">Departamento:</label>
+          <input type="text" id="departamento" name="departamento" required />
+        </div>
+
+        <div class="form-group">
+          <label for="ciudad">Ciudad:</label>
+          <input type="text" id="ciudad" name="ciudad" required />
+        </div>
+
+        <div class="form-group">
+          <label for="temperatura">Temperatura:</label>
+          <input type="number" id="temperatura" name="temperatura" required />
+        </div>
+
+        <div class="form-group">
+          <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
+          <input
+            type="date"
+            id="fecha_nacimiento"
+            name="fecha_nacimiento"
+            required
+          />
+        </div>
+
+        <button type="submit" class="btn">Registrar</button>
+      </form>
+    </div>
+
+    <!-- Consultar -->
+    <div class="container" id="consulta" style="display: none">
+      <h2>Consultar Persona por Nombre</h2>
+      <form onsubmit="consultarPersona(event)">
+        <div class="form-group">
+          <label for="nombre_consulta">Nombre:</label>
+          <input
+            type="text"
+            id="nombre_consulta"
+            name="nombre_consulta"
+            required
+          />
+        </div>
+        <button type="submit" class="btn">Consultar</button>
+      </form>
+      <ul id="resultadoConsulta"></ul>
+    </div>
+
+    <!-- Actualizar -->
+    <div class="container" id="actualizar" style="display: none">
+      <h2>Actualizar Persona</h2>
+      <form id="actualizarForm" onsubmit="actualizarPersona(event)">
+        <div class="form-group">
+          <label for="nombre_actualizar_buscar">Nombre:</label>
+          <input
+            type="text"
+            id="nombre_actualizar_buscar"
+            name="nombre_actualizar_buscar"
+            required
+          />
+        </div>
+
+        <button type="button" class="btn" onclick="cargarDatosParaActualizar()">
+          Buscar Persona
+        </button>
+
+        <div id="actualizarCampos" style="display: none">
+          <div class="form-group">
+            <label for="nombre_actualizar">Nombre:</label>
+            <input
+              type="text"
+              id="nombre_actualizar"
+              name="nombre_actualizar"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="telefono_actualizar">Teléfono:</label>
+            <input
+              type="tel"
+              id="telefono_actualizar"
+              name="telefono_actualizar"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="sexo_actualizar">Sexo:</label>
+            <select id="sexo_actualizar" name="sexo_actualizar" required>
+              <option value="masculino">Masculino</option>
+              <option value="femenino">Femenino</option>
+              <option value="otro">Otro</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="pais_actualizar">País:</label>
+            <input
+              type="text"
+              id="pais_actualizar"
+              name="pais_actualizar"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="departamento_actualizar">Departamento:</label>
+            <input
+              type="text"
+              id="departamento_actualizar"
+              name="departamento_actualizar"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="ciudad_actualizar">Ciudad:</label>
+            <input
+              type="text"
+              id="ciudad_actualizar"
+              name="ciudad_actualizar"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="temperatura_actualizar">Temperatura:</label>
+            <input
+              type="number"
+              id="temperatura_actualizar"
+              name="temperatura_actualizar"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="fecha_nacimiento_actualizar"
+              >Fecha de Nacimiento:</label
+            >
+            <input
+              type="date"
+              id="fecha_nacimiento_actualizar"
+              name="fecha_nacimiento_actualizar"
+              required
+            />
+          </div>
+
+          <button type="submit" class="btn">Actualizar</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Eliminar -->
+    <div class="container" id="eliminar" style="display: none">
+      <h2>Eliminar Persona</h2>
+      <form id="eliminarForm" onsubmit="eliminarPersona(event)">
+        <div class="form-group">
+          <label for="nombre_eliminar">Nombre:</label>
+          <input
+            type="text"
+            id="nombre_eliminar"
+            name="nombre_eliminar"
+            required
+          />
+        </div>
+
+        <button type="submit" class="btn">Eliminar</button>
+      </form>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
